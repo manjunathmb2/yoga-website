@@ -30,6 +30,10 @@ export default function Nav() {
         .nav-cta { padding: 10px 22px; font-size: .9rem; color: var(--white) !important; }
         @media (max-width: 720px) {
           .nav-links a:not(.nav-cta) { display: none; }
+          .nav-inner { height: 60px; gap: 12px; }
+          .brand { font-size: 1.1rem; white-space: nowrap; }
+          .nav-cta { padding: 9px 16px; font-size: .82rem; }
+        }
         }
       `}</style>
     </nav>
