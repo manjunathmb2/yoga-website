@@ -56,7 +56,7 @@ export default function Hero() {
         .ring-1 { width: 78%; height: 78%; border-color: var(--sage); opacity: .6; }
         .ring-2 { width: 100%; height: 100%; animation-delay: .4s; opacity: .35; }
         .breath-core {
-          width: 52%; height: 52%; border-radius: 50%;
+          width: 62%; height: 62%; border-radius: 50%;
           background: radial-gradient(circle at 35% 30%, var(--sage), var(--sage-deep));
           display: flex; align-items: center; justify-content: center;
           animation: breathe 8s ease-in-out infinite;
@@ -64,7 +64,9 @@ export default function Hero() {
         }
         .breath-label {
           font-family: var(--font-display); color: var(--cream);
-          font-size: 1.4rem; letter-spacing: .05em; font-style: italic;
+          font-size: 1.25rem; letter-spacing: .04em; font-style: italic;
+          white-space: nowrap;
+        }
         }
         @keyframes breathe {
           0%, 100% { transform: scale(.86); }
