@@ -28,9 +28,7 @@ export default function Hero() {
         <div className="hero-visual" aria-hidden="true">
           <div className="breath-ring ring-1"></div>
           <div className="breath-ring ring-2"></div>
-          <div className="breath-core">
-            <span className="breath-label">breathe</span>
-          </div>
+          <div className="breath-core"></div>
         </div>
       </div>
 
@@ -58,15 +56,8 @@ export default function Hero() {
         .breath-core {
           width: 62%; height: 62%; border-radius: 50%;
           background: radial-gradient(circle at 35% 30%, var(--sage), var(--sage-deep));
-          display: flex; align-items: center; justify-content: center;
           animation: breathe 8s ease-in-out infinite;
           box-shadow: 0 20px 50px rgba(61,74,62,.3);
-        }
-        .breath-label {
-          font-family: var(--font-display); color: var(--cream);
-          font-size: 1.25rem; letter-spacing: .04em; font-style: italic;
-          white-space: nowrap;
-        }
         }
         @keyframes breathe {
           0%, 100% { transform: scale(.86); }
