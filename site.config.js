@@ -4,7 +4,7 @@
 // ============================================================
 
 export const site = {
-  teacherName: "Priya Sharma",          // <-- your wife's name
+  teacherName: "Divine - Divyoga",          // <-- your wife's name
   tagline: "Online Yoga, Rooted in Breath",
   city: "Mysuru",                        // for local SEO
   yearsExperience: "8",
@@ -12,7 +12,7 @@ export const site = {
 
   // WhatsApp — country code + number, NO +, spaces or dashes
   // India example: 91 + 10-digit number
-  whatsappNumber: "919876543210",        // <-- change this
+  whatsappNumber: "918496818794",        // <-- change this
 
   email: "hello@example.com",            // <-- where leads should arrive
   domain: "https://www.yourdomain.com",  // <-- your bought domain
