@@ -21,7 +21,7 @@ export const site = {
   // Paste your key in the form below, see components/ContactForm.jsx
   web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY",
 
-  freeTrialText: "Book a Free Trial Class",
+  freeTrialText: "Book a Free Trial",
 
   classes: [
     {
