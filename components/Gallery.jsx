@@ -18,12 +18,12 @@ export default function Gallery() {
         </Reveal>
         <div className="pose-row">
           {POSES.map((p, i) => (
-            <Reveal key={p.label} className="pose-item" delay={i * 90}>
+            <div className="pose-item" key={p.label}>
               <div className="pose-disc">
                 <img src={p.src} alt={p.label} loading="lazy" />
               </div>
               <span className="pose-label">{p.label}</span>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>
@@ -58,10 +58,8 @@ export default function Gallery() {
           50% { transform: translateY(-10px); }
         }
         @media (max-width: 820px) {
-          .pose-row { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-        }
-        @media (max-width: 420px) {
-          .pose-row { grid-template-columns: repeat(2, 1fr); }
+          .pose-row { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+          .section-title { margin-bottom: 36px; }
         }
       `}</style>
     </section>
