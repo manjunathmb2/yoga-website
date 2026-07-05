@@ -5,7 +5,6 @@ const POSES = [
   { src: '/poses/pose-scorpion.png', label: 'Vrschikasana' },
   { src: '/poses/pose-backbend.png', label: 'Deep Backbend' },
   { src: '/poses/pose-inverted.png', label: 'Inversion' },
-  { src: '/poses/pose-split-fold.png', label: 'Forward Fold' },
 ];
 
 export default function Gallery() {
@@ -17,9 +16,9 @@ export default function Gallery() {
           <h2 className="section-title">Strength, balance, grace</h2>
         </Reveal>
         <div className="pose-row">
-          {POSES.map((p, i) => (
+          {POSES.map((p) => (
             <div className="pose-item" key={p.label}>
-              <div className="pose-disc">
+              <div className="pose-card">
                 <img src={p.src} alt={p.label} loading="lazy" />
               </div>
               <span className="pose-label">{p.label}</span>
@@ -31,34 +30,27 @@ export default function Gallery() {
         .gallery { background: var(--white); }
         .section-title { font-size: clamp(2rem, 4vw, 2.9rem); color: var(--forest); margin-bottom: 52px; }
         .pose-row {
-          display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+          display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
         }
-        .pose-item { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-        .pose-disc {
-          width: 100%; aspect-ratio: 1; border-radius: 50%;
-          background: radial-gradient(circle at 50% 35%, var(--stone), var(--stone-dark));
+        .pose-item { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+        .pose-card {
+          width: 100%; aspect-ratio: 3/4; border-radius: 20px;
+          background: linear-gradient(165deg, var(--stone), var(--stone-dark));
           display: flex; align-items: flex-end; justify-content: center;
           overflow: hidden; position: relative;
-          animation: floaty 6s ease-in-out infinite;
+          transition: transform .3s ease, box-shadow .3s ease;
         }
-        .pose-item:nth-child(2) .pose-disc { animation-delay: .8s; }
-        .pose-item:nth-child(3) .pose-disc { animation-delay: 1.6s; }
-        .pose-item:nth-child(4) .pose-disc { animation-delay: 2.4s; }
-        .pose-item:nth-child(5) .pose-disc { animation-delay: 3.2s; }
-        .pose-disc img {
-          height: 90%; width: auto; object-fit: contain;
-          filter: drop-shadow(0 8px 16px rgba(24,34,25,.2));
+        .pose-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(24,34,25,.14); }
+        .pose-card img {
+          height: 94%; width: auto; object-fit: contain;
+          filter: drop-shadow(0 8px 16px rgba(24,34,25,.22));
         }
         .pose-label {
-          font-size: .82rem; letter-spacing: .06em; color: var(--ink-soft);
+          font-size: .9rem; letter-spacing: .05em; color: var(--ink-soft);
           font-weight: 500; text-align: center;
         }
-        @keyframes floaty {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
         @media (max-width: 820px) {
-          .pose-row { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+          .pose-row { grid-template-columns: repeat(2, 1fr); gap: 18px; }
           .section-title { margin-bottom: 36px; }
         }
       `}</style>
