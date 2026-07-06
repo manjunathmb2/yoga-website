@@ -5,7 +5,7 @@ export default function About() {
   return (
     <section id="about" className="about">
       <div className="container about-inner">
-        <Reveal className="about-photo">
+        <div className="about-photo">
           <div className="photo-frame">
             <img
               src="/poses/pose-standing.png"
@@ -16,7 +16,7 @@ export default function About() {
             <strong>{site.yearsExperience}+ yrs</strong>
             <span>guiding practice</span>
           </div>
-        </Reveal>
+        </div>
 
         <Reveal className="about-copy" delay={120}>
           <p className="eyebrow">Your teacher</p>

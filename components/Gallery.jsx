@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Reveal from './Reveal';
 
 const POSES = [
@@ -8,6 +11,40 @@ const POSES = [
 ];
 
 export default function Gallery() {
+  const [progress, setProgress] = useState(Array(POSES.length).fill(0));
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const gallery = document.getElementById('gallery');
+      if (!gallery) return;
+
+      const galleryTop = gallery.offsetTop;
+      const scrollTop = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const cardHeight = Math.min(viewportHeight * 0.74, 620);
+      const gap = 72;
+      const track = cardHeight + gap;
+
+      const nextProgress = POSES.map((_, index) => {
+        const start = galleryTop + 180 + index * track;
+        const end = start + 360;
+        const raw = (scrollTop - start + 120) / (end - start);
+        return Math.min(1, Math.max(0, raw));
+      });
+
+      setProgress(nextProgress);
+    };
+
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+
+    return () => {
+      window.removeEventListener('scroll', updateProgress);
+      window.removeEventListener('resize', updateProgress);
+    };
+  }, []);
+
   return (
     <section id="gallery" className="gallery">
       <div className="container">
@@ -19,7 +56,14 @@ export default function Gallery() {
 
       <div className="stack">
         {POSES.map((p, i) => (
-          <div className="stack-item" key={p.label} style={{ top: `${90 + i * 26}px` }}>
+          <div
+            className="stack-item"
+            key={p.label}
+            style={{
+              zIndex: i + 1,
+              transform: `translateY(${-Math.round(progress[i] * (112 + i * 28))}px)`,
+            }}
+          >
             <div className="stack-card">
               <div className="card-media">
                 <img src={p.src} alt={p.label} loading="lazy" />
@@ -36,24 +80,42 @@ export default function Gallery() {
       </div>
 
       <style>{`
-        .gallery { background: var(--white); padding-bottom: 60px; }
+        .gallery {
+          background: var(--white);
+          padding-bottom: 80px;
+          overflow: visible;
+        }
         .section-title { font-size: clamp(2rem, 4vw, 2.9rem); color: var(--forest); margin-bottom: 20px; }
 
-        .stack { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+        .stack {
+          position: relative;
+          max-width: 1000px;
+          margin: 0 auto;
+          padding: 24px 24px 260px;
+          overflow: visible;
+        }
         .stack-item {
           position: sticky;
-          height: 78vh;
-          display: flex; align-items: center;
+          top: 24px;
+          height: min(90vh, 760px);
+          display: flex;
+          align-items: center;
+          margin-bottom: -3.2rem;
+          z-index: 1;
+          will-change: transform;
         }
+        .stack-item:last-child { margin-bottom: 0; }
         .stack-card {
           width: 100%;
+          height: min(72vh, 620px);
+          transform: translateZ(0);
           background: linear-gradient(150deg, var(--stone), var(--stone-dark));
           border-radius: 28px;
           box-shadow: 0 24px 60px rgba(24,34,25,.18);
           display: grid; grid-template-columns: 1fr 1fr;
-          overflow: hidden;
           min-height: 60vh;
           border: 1px solid rgba(255,255,255,.5);
+          overflow: visible;
         }
         .card-media {
           display: flex; align-items: flex-end; justify-content: center;
@@ -77,8 +139,17 @@ export default function Gallery() {
         .card-num { font-size: .85rem; color: var(--eucalyptus); font-weight: 600; letter-spacing: .05em; }
 
         @media (max-width: 760px) {
-          .stack-item { height: auto; min-height: 84vh; padding: 8px 0; }
+          .stack { padding: 16px 16px 40px; }
+          .stack { padding: 16px 16px 180px; }
+          .stack-item {
+            top: 16px;
+            height: min(88vh, 720px);
+            padding: 8px 0;
+            margin-top: 0 !important;
+            margin-bottom: -2.25rem;
+          }
           .stack-card {
+            top: auto;
             grid-template-columns: 1fr;
             min-height: auto;
           }
